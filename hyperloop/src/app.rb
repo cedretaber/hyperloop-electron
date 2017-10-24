@@ -4,10 +4,9 @@ class Root
   include Hyperloop::Component::Mixin
 
   render do
-    DIV(class: "ink-grid") do
-      DIV(class: "column-group") do
-        DIV(class: "all-20")
-        DIV(class: "all-60") do
+    DIV(class: "container") do
+      DIV(class: "columns") do
+        DIV(class: "column col-8 col-mx-auto") do
           H1 { "Todo List" }
           TodoList()
         end

@@ -24,20 +24,13 @@ class TodoList
   end
 
   render do
-    TABLE(class: "ink-table") do
+    TABLE(class: "table table-striped table-hover") do
       THEAD do
         TR do
           TH { "#" }
-          TH { "description" }
-          TH { "completed" }
-          TH {}
-        end
-      end
-      TBODY do
-        TR do
-          TD {}
-          TD(colSpan: "2") do
+          TH do
             INPUT(
+              class: "form-input",
               style: { width: "100%" },
               type: "text",
               value: state.desc
@@ -46,21 +39,33 @@ class TodoList
               mutate.desc(e.target.value)
             }
           end
-          TD do
-            BUTTON { ">>" }.on(:click) { add_todo }
+          TH do
+            BUTTON(class: "btn") { ">>" }.on(:click) { add_todo }
           end
         end
+      end
+      TBODY do
         state.todos.each.with_index do |todo, i|
           TR do
-            TD { (i+1).to_s }
-            TD { todo.desc }
             TD do
-              INPUT(type: :checkbox, value: todo.status).on(:change) {
+              SPAN { "#{(i+1).to_s} / " }
+              INPUT(
+                class: "form-checkbox",
+                type: :checkbox,
+                value: todo.status
+              ).on(:change) {
                 complete_todo i
               }
             end
             TD do
-              BUTTON { "×" }.on(:click) { delete_todo i }
+              if state.todos[i].status
+                DEL { todo.desc }
+              else
+                todo.desc
+              end
+            end
+            TD do
+              BUTTON(class: "btn") { "×" }.on(:click) { delete_todo i }
             end
           end
         end

@@ -1,0 +1,24 @@
+{
+  "name": "hyperloop",
+  "homepage": "https://github.com/cedretaber/hyperloop-electron",
+  "authors": [
+    "cedretaber <cedretaber@gmail.com>"
+  ],
+  "description": "",
+  "main": "dist/bundle.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.6.0",
+    "jquery": "^3.2.0",
+    "hyperloop-js": "git://github.com/ruby-hyperloop/hyperloop-js.git",
+    "spectre.css": "^0.4.5"
+  }
+}
