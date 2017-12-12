@@ -1,7 +1,7 @@
 class Todo
   attr_reader :desc, :status
 
-  def initialize(desc, status)
+  def initialize(desc, status = false)
     @desc = desc
     @status = status
   end

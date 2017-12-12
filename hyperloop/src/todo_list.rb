@@ -7,7 +7,7 @@ class TodoList
   state desc: ""
 
   def add_todo
-    mutate.todos << Todo.new(state.desc, false)
+    mutate.todos << Todo.new(state.desc)
     mutate.desc("")
   end
 
