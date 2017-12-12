@@ -58,7 +58,7 @@ class TodoList
               }
             end
             TD do
-              if state.todos[i].status
+              if todo.status
                 DEL { todo.desc }
               else
                 todo.desc
