@@ -12,15 +12,15 @@ class TodoList
   end
 
   def complete_todo(i)
-    mutate.todos(state.todos.tap { |todos|
+    mutate.todos.tap { |todos|
       todos[i] = todos[i].toggle
-    })
+    }
   end
 
   def delete_todo(i)
-    mutate.todos(state.todos.tap { |todos|
+    mutate.todos.tap { |todos|
       todos.delete_at i
-    })
+    }
   end
 
   def render
