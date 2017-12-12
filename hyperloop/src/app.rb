@@ -3,7 +3,7 @@ require_relative "todo_list"
 class Root
   include Hyperloop::Component::Mixin
 
-  render do
+  def render
     DIV(class: "container") do
       DIV(class: "columns") do
         DIV(class: "column col-8 col-mx-auto") do

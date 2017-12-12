@@ -23,7 +23,7 @@ class TodoList
     })
   end
 
-  render do
+  def render
     TABLE(class: "table table-striped table-hover") do
       THEAD do
         TR do
