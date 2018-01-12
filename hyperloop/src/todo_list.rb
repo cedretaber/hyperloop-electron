@@ -4,23 +4,21 @@ class TodoList
   include Hyperloop::Component::Mixin
 
   state todos: []
-  state desc: ""
+  state desc: false
 
   def add_todo
-    mutate.todos << Todo.new(state.desc)
-    mutate.desc("")
+    if @desc && !@desc.empty?
+      mutate.todos << Todo.new(@desc)
+      mutate.desc(true)
+    end
   end
 
   def complete_todo(i)
-    mutate.todos.tap { |todos|
-      todos[i] = todos[i].toggle
-    }
+    mutate.todos[i] = state.todos[i].toggle
   end
 
   def delete_todo(i)
-    mutate.todos.tap { |todos|
-      todos.delete_at i
-    }
+    mutate.todos.delete_at i
   end
 
   def render
@@ -29,14 +27,18 @@ class TodoList
         TR do
           TH { "#" }
           TH do
-            INPUT(
+            attrs = {
               class: "form-input",
               style: { width: "100%" },
-              type: "text",
-              value: state.desc
-            ).on(:input) { |e|
+              type: "text"
+            }
+            if state.desc
+              attrs[:value] = ""
+              mutate.desc(false)
+            end
+            INPUT(attrs).on(:input) { |e|
               e.prevent_default
-              mutate.desc(e.target.value)
+              @desc = e.target.value
             }
           end
           TH do
@@ -52,7 +54,7 @@ class TodoList
               INPUT(
                 class: "form-checkbox",
                 type: :checkbox,
-                value: todo.status
+                checked: todo.status
               ).on(:change) {
                 complete_todo i
               }
